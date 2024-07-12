@@ -1,0 +1,1 @@
+ENTRYPOINT ["node", "server.js"]
