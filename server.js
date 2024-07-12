@@ -1,6 +1,10 @@
 import "https://deno.land/x/dotenv/load.ts";
 
 // Listen on a specific host via the HOST environment variable
+import lib from "./lib/rate-limit";
+
+import cors_proxy from "./lib/cors-anywhere";
+
 var host = Deno.env.get("HOST") || '0.0.0.0';
 // Listen on a specific port via the PORT environment variable
 var port = Deno.env.get("PORT") || 8080;
@@ -19,9 +23,7 @@ function parseEnvList(env) {
 }
 
 // Set up rate-limiting to avoid abuse of the public CORS Anywhere server.
-var checkRateLimit = require('./lib/rate-limit')(Deno.env.get("CORSANYWHERE_RATELIMIT"));
-
-var cors_proxy = require('./lib/cors-anywhere');
+var checkRateLimit = lib(Deno.env.get("CORSANYWHERE_RATELIMIT"));
 cors_proxy.createServer({
   originBlacklist: originBlacklist,
   originWhitelist: originWhitelist,
