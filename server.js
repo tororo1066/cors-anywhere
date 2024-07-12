@@ -1,9 +1,9 @@
 import "https://deno.land/x/dotenv/load.ts";
 
 // Listen on a specific host via the HOST environment variable
-import lib from "./lib/rate-limit";
+import lib from "./lib/rate-limit.js";
 
-import cors_proxy from "./lib/cors-anywhere";
+import cors_proxy from "./lib/cors-anywhere.js";
 
 var host = Deno.env.get("HOST") || '0.0.0.0';
 // Listen on a specific port via the PORT environment variable
